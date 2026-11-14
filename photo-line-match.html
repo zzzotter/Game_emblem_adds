@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f4ef">
+  <meta name="description" content="校园照片与线描图翻牌配对游戏">
+  <title>校园光影配对</title>
+  <link rel="stylesheet" href="css/memory-match.css">
+</head>
+<body>
+  <main class="match-app">
+    <header class="match-header">
+      <a class="back-link" href="index.html#games" aria-label="返回游戏选择">← <span>选择游戏</span></a>
+      <div class="match-title-block">
+        <p class="eyebrow">GAME 02 · MEMORY MATCH</p>
+        <h1>校园光影配对</h1>
+        <p class="match-subtitle">把校园照片和对应的线描图配成一对</p>
+      </div>
+      <button class="restart-button" id="restart-game" type="button">重新开始</button>
+    </header>
+
+    <nav class="difficulty-picker" aria-label="选择游戏难度">
+      <span class="difficulty-label">难度</span>
+      <button type="button" class="difficulty-button" data-difficulty="beginner" aria-pressed="false">初级 <small>4×4</small></button>
+      <button type="button" class="difficulty-button" data-difficulty="intermediate" aria-pressed="false">中级 <small>4×5</small></button>
+      <button type="button" class="difficulty-button is-selected" data-difficulty="advanced" aria-pressed="true">高级 <small>4×6</small></button>
+    </nav>
+
+    <section class="match-status" aria-label="游戏进度">
+      <div><span>已配对</span><strong><span id="matched-count">0</span> / <span id="total-pairs">12</span></strong></div>
+      <div><span>翻牌次数</span><strong id="turn-count">0</strong></div>
+      <p class="rule-hint">每次翻开两张；不匹配时，1.5 秒后盖回</p>
+    </section>
+
+    <section class="board-wrap" aria-label="翻牌区域">
+      <div class="match-board" id="match-board" aria-live="polite"></div>
+    </section>
+    <p class="match-footer">每轮从 24 组校园图像中随机抽取</p>
+
+    <dialog class="match-dialog" id="match-dialog" aria-labelledby="finish-title">
+      <div class="dialog-content">
+        <p class="eyebrow">ROUND COMPLETE</p>
+        <h2 id="finish-title">配对完成！</h2>
+        <p id="finish-message">你找到了所有校园场景。</p>
+        <button class="restart-button restart-primary" id="play-again" type="button">再玩一轮</button>
+        <a class="back-link dialog-back" href="index.html#games">返回选择游戏</a>
+      </div>
+    </dialog>
+  </main>
+  <script type="module" src="js/photo-line-match.js"></script>
+</body>
+</html>

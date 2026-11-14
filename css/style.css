@@ -102,3 +102,7 @@ button:focus-visible { outline: 3px solid #d5ad53; outline-offset: 3px; }
 @media (prefers-reduced-motion: reduce) { .board-backdrop-image { transition-duration: .01ms; } }
 
 
+
+.result-emblem { display: block; width: 132px; height: 132px; object-fit: contain; margin: 0 auto 14px; border-radius: 50%; }
+.result-emblem[hidden] { display: none; }
+

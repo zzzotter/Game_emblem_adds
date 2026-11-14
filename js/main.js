@@ -8,6 +8,7 @@ const el = {
   home: document.querySelector("#home-button"), score: document.querySelector("#score"),
   board: document.querySelector("#board"), dialog: document.querySelector("#result-dialog"),
   resultTitle: document.querySelector("#result-title"), resultMessage: document.querySelector("#result-message"),
+  resultEmblem: document.querySelector("#result-emblem"),
   playAgain: document.querySelector("#play-again-button"), dialogHome: document.querySelector("#dialog-home-button"),
   backdrop: document.querySelector("#board-backdrop"), backdropImages: [document.querySelector("#backdrop-a"), document.querySelector("#backdrop-b")],
   backgroundToggle: document.querySelector("#background-toggle")
@@ -23,6 +24,8 @@ const backgroundFiles = [
   "Screenshot 2026-11-12 214358.png", "Screenshot 2026-11-12 214419.png"
 ].map(name => `assets/images/backgrounds/${encodeURIComponent(name)}`);
 let state = { board: [], score: 0, status: GAME_STATUS.WELCOME };
+const launchedFromHub = new URLSearchParams(window.location.search).get("from") === "hub";
+if (launchedFromHub) { el.home.textContent = "返回选游戏"; el.dialogHome.textContent = "返回选游戏"; }
 let backgroundIndex = 0;
 let visibleLayer = 0;
 let backgroundTimer = null;
@@ -86,6 +89,7 @@ function startGame() {
   draw();
 }
 function goHome() {
+  if (launchedFromHub) { window.location.href = "index.html#games"; return; }
   if (el.dialog.open) el.dialog.close();
   stopBackgrounds();
   el.game.hidden = true;
@@ -95,9 +99,11 @@ function goHome() {
 function showResult() {
   if (state.status === GAME_STATUS.WON) {
     el.resultTitle.textContent = "调出金色！";
+    el.resultEmblem.hidden = false;
     el.resultMessage.textContent = `恭喜合成金色校徽，本局得分 ${state.score}。`;
   } else if (state.status === GAME_STATUS.OVER) {
     el.resultTitle.textContent = "棋盘已满";
+    el.resultEmblem.hidden = true;
     el.resultMessage.textContent = `没有可移动或合并的卡片了，本局得分 ${state.score}。`;
   } else return;
   if (!el.dialog.open) el.dialog.showModal();
@@ -139,6 +145,10 @@ el.board.addEventListener("pointerup", event => {
   handleMove(Math.abs(dx) > Math.abs(dy) ? (dx > 0 ? "right" : "left") : (dy > 0 ? "down" : "up"));
 });
 el.board.addEventListener("pointercancel", () => { pointerStart = null; });
+
+
+
+
 
 
 
