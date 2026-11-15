@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111a29">
+  <meta name="description" content="操控学生躲避弹幕，挑战小作业、实验报告和期末考试">
+  <title>龙马路突围战 · 校园游艺社</title>
+  <link rel="stylesheet" href="css/stg.css">
+</head>
+<body>
+  <main class="stg-app">
+    <header class="stg-header">
+      <a href="index.html#games">← 返回游戏选择</a>
+      <div><p>GAME 03 · CAMPUS SHOOTER</p><h1>龙马路突围战</h1></div>
+      <button id="restart" type="button">重新开始</button>
+    </header>
+    <section class="hud" aria-label="战斗状态">
+      <div><span>生命</span><strong id="lives" aria-live="polite">♥ ♥ ♥ ♥ ♥ ♥</strong></div>
+      <div><span>场景</span><strong id="stage">龙马路 · 四季</strong></div>
+      <div class="boss-hud"><span id="boss-name">小作业</span><strong><i id="boss-bar"></i></strong></div>
+      <div><span>用时</span><strong id="timer">0:00</strong></div>
+    </section>
+    <section class="arena-wrap" aria-label="游戏区域">
+      <canvas id="arena" width="720" height="960" aria-label="使用方向键或 WASD 移动，自动攻击并躲避敌方弹幕"></canvas>
+      <div class="overlay" id="overlay">
+        <p class="overlay-kicker">龙马路 · 校园弹幕突围</p>
+        <h2 id="overlay-title">迎战校园 Boss</h2>
+        <p id="overlay-copy">方向键或 WASD 移动，主角自动发射当前关卡武器。躲避弹幕，依次挑战小作业、实验报告和期末考试。被击中 6 次失败，受击后有约 1 秒无敌时间。</p>
+        <button id="start" type="button">开始游戏</button>
+      </div>
+    </section>
+    <p class="controls-hint">移动：↑ ↓ ← → 或 W A S D　·　自动攻击　·　Boss 攻击前会显示预警</p>
+  </main>
+  <script src="js/stg.js" defer></script>
+</body>
+</html>
+
+
