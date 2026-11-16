@@ -1,6 +1,6 @@
 const TOTAL_AVAILABLE_PAIRS = 24;
 const FLIP_BACK_DELAY = 1500;
-const BACK_IMAGE = "assets/images/photo-line-match/emblem-square-03.png";
+const BACK_IMAGE = "assets/images/photo-line-match/emblem-square-03.webp";
 const LEVELS = {
   beginner: { label: "初级", pairs: 8, desktopColumns: 4 },
   intermediate: { label: "中级", pairs: 10, desktopColumns: 5 },
@@ -36,8 +36,8 @@ function shuffle(items) {
 function createDeck(pairCount) {
   const selectedPairs = shuffle(Array.from({ length: TOTAL_AVAILABLE_PAIRS }, (_, i) => i + 1)).slice(0, pairCount);
   return shuffle(selectedPairs.flatMap(pairId => [
-    { pairId, type: "photo", image: `assets/images/photo-line-match/photos/photo-${String(pairId).padStart(2, "0")}.png`, label: `校园照片 ${pairId}` },
-    { pairId, type: "line", image: `assets/images/photo-line-match/line-art/photo-line-${String(pairId).padStart(2, "0")}.png`, label: `校园线描图 ${pairId}` }
+    { pairId, type: "photo", image: `assets/images/photo-line-match/photos/photo-${String(pairId).padStart(2, "0")}.webp`, label: `校园照片 ${pairId}` },
+    { pairId, type: "line", image: `assets/images/photo-line-match/line-art/photo-line-${String(pairId).padStart(2, "0")}.webp`, label: `校园线描图 ${pairId}` }
   ])).map((card, index) => ({ ...card, id: index, faceUp: false, matched: false }));
 }
 

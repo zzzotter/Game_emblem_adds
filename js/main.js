@@ -14,14 +14,14 @@ const el = {
   backgroundToggle: document.querySelector("#background-toggle")
 };
 const backgroundFiles = [
-  "Screenshot 2026-11-12 213531.png", "Screenshot 2026-11-12 213600.png", "Screenshot 2026-11-12 213624.png",
-  "Screenshot 2026-11-12 213640.png", "Screenshot 2026-11-12 213702.png", "Screenshot 2026-11-12 213718.png",
-  "Screenshot 2026-11-12 213730.png", "Screenshot 2026-11-12 213812.png", "Screenshot 2026-11-12 213836.png",
-  "Screenshot 2026-11-12 213916.png", "Screenshot 2026-11-12 213933.png", "Screenshot 2026-11-12 214004.png",
-  "Screenshot 2026-11-12 214026.png", "Screenshot 2026-11-12 214044.png", "Screenshot 2026-11-12 214108.png",
-  "Screenshot 2026-11-12 214142.png", "Screenshot 2026-11-12 214241.png", "Screenshot 2026-11-12 214257.png",
-  "Screenshot 2026-11-12 214309.png", "Screenshot 2026-11-12 214326.png", "Screenshot 2026-11-12 214346.png",
-  "Screenshot 2026-11-12 214358.png", "Screenshot 2026-11-12 214419.png"
+"Screenshot 2026-11-12 213531.webp", "Screenshot 2026-11-12 213600.webp", "Screenshot 2026-11-12 213624.webp",
+"Screenshot 2026-11-12 213640.webp", "Screenshot 2026-11-12 213702.webp", "Screenshot 2026-11-12 213718.webp",
+"Screenshot 2026-11-12 213730.webp", "Screenshot 2026-11-12 213812.webp", "Screenshot 2026-11-12 213836.webp",
+"Screenshot 2026-11-12 213916.webp", "Screenshot 2026-11-12 213933.webp", "Screenshot 2026-11-12 214004.webp",
+"Screenshot 2026-11-12 214026.webp", "Screenshot 2026-11-12 214044.webp", "Screenshot 2026-11-12 214108.webp",
+"Screenshot 2026-11-12 214142.webp", "Screenshot 2026-11-12 214241.webp", "Screenshot 2026-11-12 214257.webp",
+"Screenshot 2026-11-12 214309.webp", "Screenshot 2026-11-12 214326.webp", "Screenshot 2026-11-12 214346.webp",
+"Screenshot 2026-11-12 214358.webp", "Screenshot 2026-11-12 214419.webp"
 ].map(name => `assets/images/backgrounds/${encodeURIComponent(name)}`);
 let state = { board: [], score: 0, status: GAME_STATUS.WELCOME };
 const launchedFromHub = new URLSearchParams(window.location.search).get("from") === "hub";
