@@ -1,4 +1,4 @@
-:root { color-scheme: light; --ink:#252a35; --muted:#737b88; --paper:#f6f4ef; --accent:#294d7a; --accent-dark:#1e3b62; --gold:#c5a45f; font-family:"Segoe UI","Microsoft YaHei",sans-serif; color:var(--ink); background:var(--paper); }
+:root { color-scheme: light; --ink:#252a35; --muted:#737b88; --paper:#f6f4ef; --accent:#871e1e; --accent-dark:#871e1e; --gold:#c5a45f; font-family:"Imprint MT Shadow","Microsoft YaHei",sans-serif; color:var(--ink); background:var(--paper); }
 * { box-sizing:border-box; }
 body { margin:0; min-width:320px; min-height:100vh; background:radial-gradient(circle at 50% 0,#fff 0,var(--paper) 72%); }
 button,a { font:inherit; }
@@ -9,7 +9,7 @@ button,a { font:inherit; }
 .hero-card::before,.hero-card::after { content:""; position:absolute; z-index:-1; left:50%; top:50%; width:min(80vw,680px); aspect-ratio:1; border:1px solid rgba(39,72,115,.065); border-radius:50%; transform:translate(-50%,-50%); }
 .hero-card::after { width:min(68vw,560px); border-color:rgba(39,72,115,.05); }
 .eyebrow { margin:0 0 12px; color:#818895; font-size:.7rem; font-weight:750; letter-spacing:.18em; }
-.hero-emblem { width:148px; height:148px; object-fit:contain; margin:15px 0 18px; filter:drop-shadow(0 8px 14px rgba(31,45,65,.13)); }
+.hero-emblem { width:400px; height:400px; object-fit:contain; margin:15px 0 18px; filter:drop-shadow(0 8px 14px rgba(31,45,65,.13)); }
 .hero-card h1,.picker-header h1,.coming-card h1 { margin:0; font-family:Georgia,"Microsoft YaHei",serif; letter-spacing:.08em; }
 .hero-card h1 { font-size:clamp(2.3rem,6vw,3.5rem); }
 .hero-copy { margin:15px 0 30px; color:var(--muted); letter-spacing:.16em; }
