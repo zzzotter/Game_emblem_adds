@@ -10,7 +10,7 @@ function start(){state='playing';stageIndex=0;lives=6;time=fireTimer=attackTimer
 function spawn(){stage=stages[stageIndex];boss={x:W/2,y:102,hp:stage.hp,maxHp:stage.hp,phase:Math.random()*5};enemyShots=[];telegraph=null;attackTimer=.5}
 function fmt(s){s=Math.floor(s);return `${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`}
 function updateHud(){$('#lives').textContent='♥ '.repeat(lives)+'♡ '.repeat(6-lives);$('#stage').textContent=stageIndex<2?'龙马路 · 四季':'龙马路 · 昼夜';$('#boss-name').textContent=boss?`${stage.name}  ${Math.ceil(boss.hp)} / ${boss.maxHp}`:'通关';$('#boss-bar').style.width=`${boss?Math.max(0,boss.hp/boss.maxHp*100):0}%`;$('#timer').textContent=fmt(time)}
-function end(win){state=win?'won':'lost';$('#overlay').hidden=false;$('#overlay-title').textContent=win?'期末通过！':'挑战失败';$('#overlay-copy').textContent=win?`三位 Boss 全部击败。用时 ${fmt(time)}，剩余生命 ${lives} 格。`:`坚持了 ${fmt(time)}。留意弹幕预警，受击后有短暂无敌时间。`;$('#start').textContent='重新挑战';updateHud()}
+function end(win){state=win?'won':'lost';$('#overlay').hidden=false;$('#overlay-title').textContent=win?'很容易就通过了嘛！':'挑战失败';$('#overlay-copy').textContent=win?`三位 Boss 全部击败。用时 ${fmt(time)}，剩余生命 ${lives} 格。`:`坚持了 ${fmt(time)}。留意弹幕预警，受击后有短暂无敌时间。`;$('#start').textContent='重新挑战';updateHud()}
 function loop(now){if(state!=='playing')return;const dt=Math.min((now-last)/1000,.04);last=now;update(dt);render();if(state==='playing')requestAnimationFrame(loop)}
 function update(dt){time+=dt;bgScroll=(bgScroll+48*dt)%H;invincible=Math.max(0,invincible-dt);if(transition>0){transition-=dt;if(transition<=0){if(stageIndex>=stages.length){end(true);return}spawn()}updateHud();return}
 let dx=(keys.has('ArrowRight')||keys.has('d')?1:0)-(keys.has('ArrowLeft')||keys.has('a')?1:0),dy=(keys.has('ArrowDown')||keys.has('s')?1:0)-(keys.has('ArrowUp')||keys.has('w')?1:0),m=Math.hypot(dx,dy)||1;player.x=Math.max(22,Math.min(W-22,player.x+dx/m*player.speed*dt));player.y=Math.max(235,Math.min(H-25,player.y+dy/m*player.speed*dt));
@@ -28,7 +28,13 @@ function drawBackground(){ctx.fillStyle='#8da18e';ctx.fillRect(0,0,W,H);const co
 function drawTile(id,scroll,alpha=1){let im=assets[id];if(!im?.complete||!im.naturalWidth)return;const scale=W/im.naturalWidth,w=im.naturalWidth*scale,h=im.naturalHeight*scale,y=scroll-H;ctx.save();ctx.globalAlpha=alpha;ctx.drawImage(im,(W-w)/2,y,w,h);ctx.drawImage(im,(W-w)/2,y+H,w,h);ctx.restore()}
 function drawWeapon(id,cx,cy,maxW,maxH){const im=assets[id];if(!im?.complete||!im.naturalWidth)return;const scale=Math.min(maxW/im.naturalWidth,maxH/im.naturalHeight),w=im.naturalWidth*scale,h=im.naturalHeight*scale;ctx.drawImage(im,cx-w/2,cy-h/2,w,h)}
 function drawPlayer(){ctx.save();ctx.translate(player.x,player.y);ctx.fillStyle='#263e59';ctx.beginPath();ctx.ellipse(0,5,16,22,0,0,Math.PI*2);ctx.fill();ctx.fillStyle='#d8b38a';ctx.beginPath();ctx.arc(0,-12,11,0,Math.PI*2);ctx.fill();ctx.fillStyle='#253149';ctx.beginPath();ctx.arc(0,-15,11,Math.PI,Math.PI*2);ctx.fill();ctx.fillRect(-11,-16,22,4);ctx.restore()}
-window.addEventListener('keydown',e=>{let k=e.key.length===1?e.key.toLowerCase():e.key;if(k.startsWith('Arrow'))e.preventDefault();keys.add(k)});window.addEventListener('keyup',e=>keys.delete(e.key.length===1?e.key.toLowerCase():e.key));window.addEventListener('blur',()=>keys.clear());$('#start').addEventListener('click',start);$('#restart').addEventListener('click',start);render();
+let dragPointer=null,dragOffset={x:0,y:0};
+function arenaPoint(event){const rect=canvas.getBoundingClientRect();return{x:(event.clientX-rect.left)*W/rect.width,y:(event.clientY-rect.top)*H/rect.height}}
+canvas.addEventListener('pointerdown',event=>{if(state!=='playing'||!event.isPrimary)return;event.preventDefault();canvas.setPointerCapture(event.pointerId);dragPointer=event.pointerId;const p=arenaPoint(event);dragOffset={x:player.x-p.x,y:player.y-p.y}});
+canvas.addEventListener('pointermove',event=>{if(state!=='playing'||event.pointerId!==dragPointer)return;event.preventDefault();const p=arenaPoint(event);player.x=Math.max(22,Math.min(W-22,p.x+dragOffset.x));player.y=Math.max(235,Math.min(H-25,p.y+dragOffset.y))});
+function stopDrag(event){if(event.pointerId===dragPointer)dragPointer=null}
+canvas.addEventListener('pointerup',stopDrag);canvas.addEventListener('pointercancel',stopDrag);canvas.addEventListener('lostpointercapture',stopDrag);
+window.addEventListener('keydown',e=>{let k=e.key.length===1?e.key.toLowerCase():e.key;if(k.startsWith('Arrow'))e.preventDefault();keys.add(k)});window.addEventListener('keyup',e=>keys.delete(e.key.length===1?e.key.toLowerCase():e.key));window.addEventListener('blur',()=>{keys.clear();dragPointer=null});$('#start').addEventListener('click',start);$('#restart').addEventListener('click',start);render();
 })();
 
 

@@ -123,6 +123,7 @@ el.playAgain.addEventListener("click", startGame);
 el.home.addEventListener("click", goHome);
 el.dialogHome.addEventListener("click", goHome);
 el.backgroundToggle.addEventListener("click", toggleBackground);
+if (launchedFromHub) startGame();
 window.addEventListener("keydown", event => {
   const direction = { ArrowLeft: "left", ArrowRight: "right", ArrowUp: "up", ArrowDown: "down" }[event.key];
   if (!direction || el.game.hidden) return;
